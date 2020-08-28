@@ -1,0 +1,144 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{%block title%}
+ROH
+{%endblock title%}
+
+{%block head%}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+{%endblock head%}
+{%block content%}
+
+<h1>Current Stock Register</h1>
+<div> 
+    <a class="btn btn-success" href="{% url 'CSR_new' %}"><h5> New Entry </h5></a> 
+    <a class="btn btn-success" href="{% url 'stores_register' %}"><h5> Back </h5></a>
+</div>
+<div class="book-detail"> 
+<h4>Search by Item</h4>
+    <form method="POST" action="{%url 'ItemDetailLink'%}">
+    {% csrf_token %}
+    <div  >
+    <input type="text", id="itemName" name="ItemName"  style="background-color: white; color:black" />
+            <script>
+            $( "#itemName" ).autocomplete({
+              source: '{%url 'ItemNameAutocomplete'%}'
+                });
+            </script> 
+    </div>
+    <div  >
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" />
+    </div>
+    </form>
+</div>
+<div class="book-detail" style="display: flex; align-items: stretch;background-color: #f1f1f1;">
+    
+    <div style="flex-grow: 8; background-color:DodgerBlue;" >
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th>S.No</th>    
+            <th>Item</th>
+            <th>PL Number</th>
+            <th>AAC</th>
+            <th>MAC</th>
+            <th>Stock</th>
+            <th>Date/Time Updated</th>
+            
+            </tr>
+        </thead>
+        
+        <tbody>
+        {%for obj in obj  %}
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'><a href="{%url 'CSR_detail' obj.id %}">{{obj.Item}}</a></td>
+                <td class='text-primary'>{{obj.PL_Number}}</td>
+                <td class='text-primary'>{{obj.AAC}}</td>
+                <td class='text-primary'>{{obj.MAC}}</td>
+                <td class='text-primary'>{{obj.Stock}}</td>
+                <td class='text-primary'>{{obj.updateTime}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+        
+        </table>
+    </div >
+    <div  style="flex-grow: 2; background-color:MediumSeaGreen;">
+        <h3 style="color:black; font-family:sans-serif; font-style:italic"> Add stock</h3>
+        <form method="POST" action="{%url 'addNewStock'%}">
+            {% csrf_token %}
+            <h5>*Item(Enter PL Number and select Item Name)</h5>
+            <input type="text" id="addNewStock" name="Item"  style="background-color: white; color:black" />
+            {{form1|crispy}}
+            <input type="submit" value="save" style="background-color: lightcoral; color:black" />
+        </form>
+        <h3 style="color:black; font-family:sans-serif; font-style:italic"> Dispatch ROH</h3>
+        <form method="POST" action="{%url 'dispatchROH'%}">
+            {% csrf_token %}
+            <h5>*Item(Enter PL Number and select Item Name)</h5>
+            <input type="text" id="dispatchROH" name="Item"  style="background-color: white; color:black" />
+            <script>
+            $( "#dispatchROH" ).autocomplete({
+              source: '{%url 'autocomplete'%}'
+                });
+            </script>
+            {{form2|crispy}}
+            <input type="submit" value="save" style="background-color: lightcoral; color:black" />
+        </form>
+        <h3 style="color:black; font-family:sans-serif; font-style:italic"> Dispatch Sickline</h3>
+        <form method="POST" action="{%url 'dispatchSickline'%}">
+            {% csrf_token %}
+            <h5>*Item(Enter PL Number and select Item Name)</h5>
+            <input type="text" id="dispatchSickline" name="Item"  style="background-color: white; color:black" />
+            <script>
+            $( "#dispatchSickline" ).autocomplete({
+              source: '{%url 'autocomplete'%}'
+                });
+            </script>
+            {{form3|crispy}}
+            <input type="submit" value="save" style="background-color: lightcoral; color:black" />
+        </form>
+        <h3 style="color:black; font-family:sans-serif; font-style:italic"> Dispatch Yard</h3>
+        <form method="POST" action="{%url 'dispatchYard'%}">
+            {% csrf_token %}
+            <h5>*Item(Enter PL Number and select Item Name)</h5>
+            <input type="text" id="dispatchYard" name="Item"  style="background-color: white; color:black" />
+            <script>
+            $( "#dispatchYard" ).autocomplete({
+              source: '{%url 'autocomplete'%}'
+                });
+            </script>
+            {{form4|crispy}}
+            <input type="submit" value="save" style="background-color: lightcoral; color:black" />
+        </form>
+        <h3 style="color:black; font-family:sans-serif; font-style:italic"> Dispatch Train Duty</h3>
+        <form method="POST" action="{%url 'dispatchTrainDuty'%}">
+            {% csrf_token %}
+            <h5>*Item(Enter PL Number and select Item Name)</h5>
+            <input type="text" id="dispatchTrainDuty" name="Item"  style="background-color: white; color:black" />
+            <script>
+            $( "#dispatchTrainDuty" ).autocomplete({
+              source: '{%url 'autocomplete'%}'
+                });
+            </script>
+            {{form5|crispy}}
+            <input type="submit" value="save" style="background-color: lightcoral; color:black" />
+        </form>
+    </div>
+</div>
+
+{% block afterbody %}
+<script>
+            $( "#addNewStock" ).autocomplete({
+              source: '{%url 'autocomplete'%}'
+                });
+            </script>
+
+{% endblock afterbody %}
+
+{%endblock content%}

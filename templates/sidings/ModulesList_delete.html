@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %} 
+<h1>Delete Entry</h1> 
+<form action="" method="post">
+    {% csrf_token %} 
+    <p><h4>Are you sure you want to delete Module {{ object.ModuleName }} ?</h4></p>
+    <a class="btn btn-success" href="{% url 'Modules_detail' object.pk %}"> Back</a>  
+    <input class="btn btn-success" type="submit" value="Confirm" /> 
+</form> 
+{% endblock %}

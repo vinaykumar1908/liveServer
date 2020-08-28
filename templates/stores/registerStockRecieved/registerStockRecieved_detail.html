@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Stock Recieved Register-{{ object.Item }}
+{% endblock title %}
+
+{% block content %} 
+<div> 
+    <a class="btn btn-success" href="{% url 'SRR_edit' object.pk %}"><h5> Edit Entry</h5></a>
+    <a class="btn btn-success" href="{% url 'SRR_delete' object.pk %}"><h5>Delete Entry</h5> </a>
+    <a class="btn btn-success" href="{% url 'SRR' %}"><h5> Back </h5></a> 
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th>Item</th>
+            <th>PL Number</th>
+            <th>Stock Recieved</th>
+            <th>Update Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Item_id}}</td>
+                <td class='text-primary'>{{object.pl_Number_id}}</td>
+                <td class='text-primary'>{{object.stockRecieved}}</td>
+                <td class='text-primary'>{{object.updateTime}}</td>
+            </tr>
+        </tbody>
+
+</div> 
+{% endblock content %}
+
+
+    

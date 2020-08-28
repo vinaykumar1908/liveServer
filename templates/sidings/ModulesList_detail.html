@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Module Details-{{ object.RakeNumber }}
+{% endblock title %}
+
+{% block content %} 
+<div> 
+    <a class="btn btn-success" href="{%url 'Modules_edit' object.pk%}"><h5> Edit Entry</h5></a>
+    <a class="btn btn-success" href="{%url 'Module_delete' object.pk%}"><h5>Delete Entry</h5> </a>
+    <a class="btn btn-success" href="{%url 'siding_Modules_List'%}"><h5> Back </h5></a> 
+    <a class="btn btn-success" href="{%url 'Modules_edit_ROHDate' object.pk%}"><h5> Edit ROH/POH Date</h5></a>
+    <a class="btn btn-success" href="{%url 'Modules_edit_Defect' object.pk%}"><h5> Edit Defects</h5></a>
+    <a class="btn btn-success" href="{%url 'Modules_edit_DVS' object.pk%}"><h5> Edit DVS/Made Fit Position</h5></a>
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Module Name</th>
+            <th>BPC Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.ModuleName}}</td>
+                <td class='text-primary'>{{object.BPC_Number}}</td>
+            </tr>
+        </tbody>
+    
+
+</div> 
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Wagon 1 Number</th>
+            <th>Wagon 2 Number</th>
+            <th>Wagon 3 Number</th>
+            <th>Wagon 4 Number</th>
+            <th>Wagon 5 Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Wagon1Number}}</td>
+                <td class='text-primary'>{{object.Wagon2Number}}</td>
+                <td class='text-primary'>{{object.Wagon3Number}}</td>
+                <td class='text-primary'>{{object.Wagon4Number}}</td>
+                <td class='text-primary'>{{object.Wagon5Number}}</td>
+            </tr>
+        </tbody>
+    
+
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Wagon 1 Type</th>
+            <th>Wagon 2 Type</th>
+            <th>Wagon 3 Type</th>
+            <th>Wagon 4 Type</th>
+            <th>Wagon 5 Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Wagon1Type}}</td>
+                <td class='text-primary'>{{object.Wagon2Type}}</td>
+                <td class='text-primary'>{{object.Wagon3Type}}</td>
+                <td class='text-primary'>{{object.Wagon4Type}}</td>
+                <td class='text-primary'>{{object.Wagon5Type}}</td>
+            </tr>
+        </tbody>
+    
+
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Wagon 1 Defect</th>
+            <th>Wagon 2 Defect</th>
+            <th>Wagon 3 Defect</th>
+            <th>Wagon 4 Defect</th>
+            <th>Wagon 5 Defect</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Wagon1Defect}}</td>
+                <td class='text-primary'>{{object.Wagon2Defect}}</td>
+                <td class='text-primary'>{{object.Wagon3Defect}}</td>
+                <td class='text-primary'>{{object.Wagon4Defect}}</td>
+                <td class='text-primary'>{{object.Wagon5Defect}}</td>
+            </tr>
+        </tbody>
+    
+
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>Module DVS</th>
+            <th>Module DVR</th>
+            <th>Module DVS Date Time</th>
+            <th>Module Present Position</th>
+            <th>Module Made Fit</th>
+            <th>Module Made Fit Date Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.ModuleDVS}}</td>
+                <td class='text-primary'>{{object.ModuleDVR}}</td>
+                <td class='text-primary'>{{object.ModuleDVSDateTime}}</td>
+                <td class='text-primary'>{{object.ModulePresentPosition}}</td>
+                <td class='text-primary'>{{object.ModuleMadeFit}}</td>
+                <td class='text-primary'>{{object.ModuleMadeFitDateTime}}</td>
+            </tr>
+        </tbody>
+    
+
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>Module Commissioning Date</th>  
+            <th>Module ROH Date</th>
+            <th>Module ROH Station</th>
+            <th>Module POH Date</th>
+            <th>Module POH Station</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.ModuleCommDate}}</td>
+                <td class='text-primary'>{{object.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object.ROHStation}}</td>
+                <td class='text-primary'>{{object.ModulePOHDate}}</td>
+                <td class='text-primary'>{{object.POHStation}}</td>
+                
+            </tr>
+        </tbody>
+    
+
+</div>
+
+{% endblock content %}

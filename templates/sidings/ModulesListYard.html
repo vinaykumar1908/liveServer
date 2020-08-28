@@ -1,0 +1,140 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+Sidings
+{%endblock title%}
+
+
+{%block content%}
+
+<h1>Modules Recieved List Yard</h1>
+<h4>Click on Module Name for more details</h4>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm">
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <a class="btn btn-success" href="{% url 'sidings_home' %}"><h5> Back </h5></a>
+    <a class="btn btn-success" href="{% url 'siding_Modules_List' %}"><h5> Show All </h5></a>
+</div>
+
+
+<div class="col-sm" align="left">
+<h4> Search Control </h4>
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <!-- <a class="btn btn-success" href="{% url 'sidings_home' %}"><h5> Back </h5></a> -->
+    <form method="POST" action="{%url 'ModuleDetailLink'%}">
+    {% csrf_token %}
+    <input type="text",class="form-control form-group ", id="moduleName" name="moduleName"  style="background-color: white; color:black" placeholder="Search By Module" aria-label="Search By Module" >
+            <script>
+            $( "#moduleName" ).autocomplete({
+              source: '{%url 'moduleName'%}'
+                });
+            </script> 
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" >
+    </form>
+    <form method="POST" action="{%url 'RakeDetailLink'%}">
+    {% csrf_token %}
+    <input type="text",class="form-control form-group", id="RakeNumber" name="RakeNumber"  style="background-color: white; color:black" placeholder="Search By Rake" aria-label="Search By Rake">
+            <script>
+            $( "#RakeNumber" ).autocomplete({
+              source: '{%url 'RakeNumber'%}'
+                });
+            </script> 
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" />
+    </form>
+</div>
+
+<div class="col-sm">
+<form method="POST" action="{%url 'DateDetailYardLink'%}">
+    {% csrf_token %}
+    <p>Filter by Date: </p>
+    <input type="text" id="datepicker1" name="date1"  style="background-color: white; color:black" placeholder="Start Date" aria-label="Start Date">
+    <input type="text" id="datepicker2" name="date2"  style="background-color: white; color:black" placeholder="End Date" aria-label="End Date">
+            <script>
+              $( function() {
+              $( "#datepicker1" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true });
+              } );
+            </script>
+            <script>
+              $( function() {
+              $( "#datepicker2" ).datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true });
+              } );
+            </script> 
+    <input type="submit" value="GO" style="background-color: lightcoral; color:black" />
+    </form>
+    
+</div>
+</div>
+</div>
+
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Rake Name</th>
+                <th>Module Name</th>
+                <th>Module Recieve Date</th>
+                <th>Module ROH Date</th>
+                <th>Module Present Position</th>
+                <th>Line No.</th>
+                <th>ModuleDVS</th>
+                <th>ModuleMadeFit</th>
+            </tr>
+        </thead>
+        {%for object in object_list%}
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'>{{object.RakeNumber}}</a></td> 
+                <td class='text-primary'><a href="{%url 'Modules_detail' object.pk %}">{{object.ModuleName}}</td>
+                <td class='text-primary'>{{object.ModuleRecieveDate}}</td>
+                <td class='text-primary'>{{object.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object.ModulePresentPosition}}</td> 
+                <td class='text-primary'>{{object.LineNumber}}</td>
+                <td class='text-primary'>{{object.ModuleDVS}}</td>
+                <td class='text-primary'>{{object.ModuleMadeFit}}</td>
+            </tr>
+        </tbody>
+        {%endfor%}
+</table>
+<div class="pagination">
+    {% if is_paginated %}
+
+  {% if page_obj.has_previous %}
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page=1">First</a>
+    <a class="btn page-item  btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+  {% endif %}
+
+  {% for num in page_obj.paginator.page_range %}
+    {% if page_obj.number == num %}
+      <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page_obj.has_next %}
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a class="btn page-item btn-outline-info text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+  {% endif %}
+
+{% endif %}
+</div>
+{%endblock content%}
+
+{% block afterbody %}
+<script>
+            $( "#moduleName" ).autocomplete({
+              source: '{%url 'moduleName'%}'
+                });
+            </script>
+
+{% endblock afterbody %}

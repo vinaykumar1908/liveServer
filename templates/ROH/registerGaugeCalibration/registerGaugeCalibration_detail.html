@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Gauge Calibration Register-{{ object.Date }}
+{% endblock title %}
+
+{% block content %} 
+<div> 
+    <a class="btn btn-success" href="{% url 'GC_edit' object.pk %}"><h5> Edit Entry</h5></a>
+    <a class="btn btn-success" href="{% url 'GC_delete' object.pk %}"><h5>Delete Entry</h5> </a>
+    <a class="btn btn-success" href="{% url 'GC' %}"><h5> Back </h5></a> 
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Description</th>
+            <th>IMTE Number</th>
+            <th>Next Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Description}}</td>
+                <td class='text-primary'>{{object.IMTENumber}}</td>
+                <td class='text-primary'>{{object.NextCalibrationDue}}</td>
+            </tr>
+        </tbody>
+
+</div> 
+{% endblock content %}
+
+
+    

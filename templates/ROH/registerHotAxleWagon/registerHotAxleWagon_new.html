@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Hot Axle Wagon Register - Create Entry
+{% endblock title %}
+{% block content %} 
+<h1>New Entry</h1> 
+
+<div class="content-section">
+    <form method="POST">
+        {%csrf_token%}
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Post</button>
+            <a class="btn btn-success" href="{% url 'HAWR' %}"> Back</a> 
+        </div>
+        <h3> Important! date format : YYYY-MM-DD</h3>
+        <fieldset class="form-group bg-primary">
+            
+            {{form|crispy}}
+        </fieldset>
+        
+    </form>
+</div>
+<div> 
+</div>
+{% endblock %}

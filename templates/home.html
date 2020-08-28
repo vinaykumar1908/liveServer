@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+Home
+{%endblock title%}
+
+
+{%block content%}
+
+
+
+<div class="" style="background-color: teal;">
+    <div class="">
+    <h3  class="text-dark">Critical Items</h3>
+    </div>
+    <div class="overflow-auto w-80 h-10" style="background-color:DodgerBlue;" >
+        <table class="table table-bordered ">
+        <thead>
+            <tr>
+            <th>S.No</th>    
+            <th>Item</th>
+            <th>PL Number</th>
+            <th>AAC</th>
+            <th>MAC</th>
+            <th>Stock</th>
+            <th>Date/Time Updated</th>
+            <th>Criticality</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {%for obj in obj  %}
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{obj.Item}}</a></td>
+                <td class='text-primary'>{{obj.PL_Number}}</td>
+                <td class='text-primary'>{{obj.AAC}}</td>
+                <td class='text-primary'>{{obj.MAC}}</td>
+                <td class='text-primary'>{{obj.Stock}}</td>
+                <td class='text-primary'>{{obj.updateTime}}</td>
+                <td class='text-primary'>{{obj.critical}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+        
+        </table>
+    </div >
+
+</div>
+
+
+{%endblock content%}

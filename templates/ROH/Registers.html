@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+<title>ROH Home</title>
+{%endblock title%}
+
+
+{%block content%}
+
+<h1>ROH</h1>
+
+<div>
+
+    
+    <ul class="list-group">
+        <li class="list-group-item"><a href="{%url 'WRJudwR'%}">Wheel Recieved From JUDW</a></li>
+        <li class="list-group-item"><a href="{%url 'WDJudwR'%}">Wheel Dispatched To JUDW</a></li>
+        <li class="list-group-item"><a href="{%url 'HAWR'%}">Hot Axle Wagon Register</a></li>
+        <li class="list-group-item"><a href="{%url 'GC'%}">Gauge Calibration Register</a></li>
+    </ul>
+</div>
+
+{%endblock content%}

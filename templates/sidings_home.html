@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+Sidings Home
+{%endblock title%}
+
+
+{%block content%}
+
+<h1 class="center bg-danger">Sidings Home</h1>
+
+<div class="">
+    <div class="center bg-warning" >
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{%url 'siding_Modules_Recieved'%}">Modules Recieved</a></li>
+            <li class="list-group-item"><a href="{%url 'siding_Modules_List'%}">Modules List</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="">
+    <div class="center bg-warning" >
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{%url 'TKDICD_Modules_List'%}">TKD ICD</a></li>
+            <li class="list-group-item"><a href="{%url 'TKDHTPP_Modules_List'%}">TKD HTPP</a></li>
+            <li class="list-group-item"><a href="{%url 'TKDACTL_Modules_List'%}">TKD ACTL</a></li>
+            <li class="list-group-item"><a href="{%url 'SSBGHH_Modules_List'%}">SSB GHH</a></li>
+            <li class="list-group-item"><a href="{%url 'SSBPTT_Modules_List'%}">SSB PTT</a></li>
+            <li class="list-group-item"><a href="{%url 'PNPBMDJ_Modules_List'%}">PNP BMDJ</a></li>
+            <li class="list-group-item"><a href="{%url 'PNPDWNA_Modules_List'%}">PNP DWNA</a></li>
+            <li class="list-group-item"><a href="{%url 'GZBNOLI_Modules_List'%}">GZB NOLI</a></li>
+            <li class="list-group-item"><a href="{%url 'GZBMUZ_Modules_List'%}">GZB MUZ</a></li>
+
+        </ul>
+    </div>
+</div>
+
+{%endblock content%}

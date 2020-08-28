@@ -1,0 +1,16 @@
+<!-- templates/post_edit.html --> 
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<h1>Edit post</h1> 
+<div> 
+    </div>
+<form action="" method="post">
+    {% csrf_token %}
+    <h4> Important! date format : YYYY-MM-DD</h4>
+    <h4> Important! date time format : YYYY-MM-DD HH:MM:SS</h4>
+    <a class="btn btn-success" href="{% url 'Modules_detail' object.pk  %}"> Back</a>  
+    <input class="btn btn-success" type="submit" value="Update" />
+    {{form|crispy}}
+</form>
+{% endblock %}

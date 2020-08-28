@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+<title>ROH</title>
+{%endblock title%}
+
+
+{%block content%}
+
+<h1>Gauge Calibration Register</h1>
+<div> 
+    <a class="btn btn-success" href="{% url 'GC_new' %}"><h5> New Entry </h5></a> 
+    <a class="btn btn-success" href="{% url 'ROH_Register' %}"><h5> Back </h5></a>
+</div>
+<table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Description</th>
+            <th>IMTE Number</th>
+            <th>Next Due Date</th>
+            </tr>
+        </thead>
+        {%for object in object_list%}
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'><a href="{%url 'GC_detail' object.id %}">{{object.Description}}</a></td>
+                <td class='text-primary'>{{object.IMTENumber}}</td>
+                <td class='text-primary'>{{object.NextCalibrationDue}}</td>
+            </tr>
+        </tbody>
+        {%endfor%}
+</table>
+{%endblock content%}

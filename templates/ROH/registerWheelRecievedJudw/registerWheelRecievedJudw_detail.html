@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ROH Wheel Recieved JUDW-{{ object.Date }}
+{% endblock title %}
+
+{% block content %} 
+<div> 
+    <a class="btn btn-success" href="{% url 'WRJudwR_edit' object.pk %}"><h5> Edit Entry</h5></a>
+    <a class="btn btn-success" href="{% url 'WRJudwR_delete' object.pk %}"><h5>Delete Entry</h5> </a>
+    <a class="btn btn-success" href="{% url 'WRJudwR' %}"><h5> Back </h5></a> 
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>Date</th>
+            <th>Truck Number</th>
+            <th>Number of BLC Wheels</th>
+            <th>Number of BCN Wheels</th>
+            <th>Number of ICF Wheels</th>
+            <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'>{{object.TruckNo}}</td>
+                <td class='text-primary'>{{object.BLC}}</td>
+                <td class='text-primary'>{{object.BCN}}</td>
+                <td class='text-primary'>{{object.ICF}}</td>
+                <td class='text-primary'>{{object.Remark}}</td>
+            </tr>
+        </tbody>
+
+</div> 
+{% endblock content %}
+
+
+    

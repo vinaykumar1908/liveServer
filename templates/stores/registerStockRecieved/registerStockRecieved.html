@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+ROH
+{%endblock title%}
+
+
+{%block content%}
+
+<h1>Stock Recieved Register</h1>
+<div> 
+    <!-- <a class="btn btn-success" href="{% url 'SRR_new' %}"><h5> New Entry </h5></a> -->
+    <a class="btn btn-success" href="{% url 'stores_register' %}"><h5> Back </h5></a>
+</div>
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+                <th>S.no.</th>
+                <th>Item</th>
+                <th>P L Number</th>
+                <th>Stock Recieved</th>
+                <th>Stock Recieved From</th>
+                <th>Update Time</th>
+                
+            </tr>
+        </thead>
+        {%for object in object_list%}
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{object.Item}}</a></td>
+                <td class='text-primary'>{{object.pl_Number}}</td> 
+                <td class='text-primary'>{{object.stockRecieved}}</td>
+                <td class='text-primary'>{{object.stockRecievedChoices}}</td>
+                <td class='text-primary'>{{object.updateTime}}</td>
+            </tr>
+        </tbody>
+        {%endfor%}
+    </table>
+    <div class="pagination">
+        {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn page-item badge badge-primary btn-outline-info text-success mb-4" href="?page=1">First</a>
+        <a class="btn page-item badge badge-primary btn-outline-info text-success mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn page-item active badge badge-success btn-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn page-item active badge badge-success btn-outline-info text-success mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn page-item btn-outline-info badge badge-primary text-success mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn page-item btn-outline-info badge badge-primary text-success mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+    </div>
+
+
+    
+
+</div>
+{%endblock content%}
+

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Hot Axle Wagon Register-{{ object.Date }}
+{% endblock title %}
+
+{% block content %} 
+<div> 
+    <a class="btn btn-success" href="{% url 'HAWR_edit' object.pk %}"><h5> Edit Entry</h5></a>
+    <a class="btn btn-success" href="{% url 'HAWR_delete' object.pk %}"><h5>Delete Entry</h5> </a>
+    <a class="btn btn-success" href="{% url 'HAWR' %}"><h5> Back </h5></a> 
+</div>
+<div class="book-detail">
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>    
+            <th>DateDetached</th>
+            <th>Station</th>
+            <th>Section</th>
+            <th>WagonNumber</th>
+            <th>Railway</th>
+            <th>Class</th>
+            <th>TruckNo</th>
+            <th>WheelRecieveDate</th>
+            <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'>{{object.DateDetached}}</a></td>
+                <td class='text-primary'>{{object.Station}}</td>
+                <td class='text-primary'>{{object.Section}}</td>
+                <td class='text-primary'>{{object.WagonNumber}}</td>
+                <td class='text-primary'>{{object.Railway}}</td>
+                <td class='text-primary'>{{object.Class}}</td>
+                <td class='text-primary'>{{object.TruckNo}}</td>
+                <td class='text-primary'>{{object.WheelRecieveDate}}</td>
+                <td class='text-primary'>{{object.Remark}}</td>
+            </tr>
+        </tbody>
+
+</div> 
+{% endblock content %}
+
+
+    

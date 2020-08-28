@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+
+
+{%block title%}
+ROH Home
+{%endblock title%}
+
+
+{%block content%}
+
+<h1 class="center bg-danger">ROH Home</h1>
+
+<div>
+    <ul class="list-group center bg-warning">
+        <li class="list-group-item"><a href="{%url 'ROH_Register'%}">Registers</a></li>
+        <li class="list-group-item"><a href="{%url 'ROH_Modules'%}">Modules booked for ROH</a></li>
+
+    </ul>
+</div>
+
+{%endblock content%}

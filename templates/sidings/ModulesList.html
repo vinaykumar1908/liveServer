@@ -82,6 +82,7 @@ Sidings
                 <th>Line No.</th>
                 <th>ModuleDVS</th>
                 <th>ModuleMadeFit</th>
+                <th>Checked By</th>
             </tr>
         </thead>
         {%for object in object_list%}
@@ -97,6 +98,8 @@ Sidings
                 <td class='text-primary'>{{object.LineNumber}}</td>
                 <td class='text-primary'>{{object.ModuleDVS}}</td>
                 <td class='text-primary'>{{object.ModuleMadeFit}}</td>
+                <td class='text-primary'>{{object.author}}</td>
+
             </tr>
         </tbody>
         {%endfor%}

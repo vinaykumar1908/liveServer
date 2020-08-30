@@ -17,8 +17,10 @@ from itertools import filterfalse
 #from .forms import registerStockRecievedForm, registerStockDispatchROHform, registerStockDispatchSicklineform, registerStockDispatchedYardform, registerStockDispatchedTrainDutyform
 from django.utils import timezone
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 class HomePageView(TemplateView):
     template_name = 'home.html'
 
@@ -27,6 +29,7 @@ class SuccessPageView(TemplateView):
     template_name = 'success.html'
 
 
+@login_required
 def homeView(request):
     qs = SM.registerCurrentStock.objects.all()
   

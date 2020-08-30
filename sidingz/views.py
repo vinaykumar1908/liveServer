@@ -7,18 +7,22 @@ from django.urls import reverse_lazy
 # from .forms import registerStockRecievedForm, registerStockDispatchROHform, registerStockDispatchSicklineform, registerStockDispatchedYardform, registerStockDispatchedTrainDutyform
 from django.utils import timezone
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 
 
-class SidingHomePageView(TemplateView):
+class SidingHomePageView(LoginRequiredMixin,TemplateView):
     template_name = 'sidings_home.html'
 
 
-class SidingICDOkhlaHomePageView(TemplateView):
+class SidingICDOkhlaHomePageView(LoginRequiredMixin,TemplateView):
     template_name = 'sidings/ICD_Okhla_home.html'
 
 
-class SidingModuleRecievedPageView(CreateView):
+
+class SidingModuleRecievedPageView(LoginRequiredMixin, CreateView):
     model = models.ModuleRecieved
     template_name = 'sidings/ModuleRecieved.html'
     fields = ['RakeNumber', 'BPC_Number',
@@ -32,20 +36,24 @@ class SidingModuleRecievedPageView(CreateView):
               'Wagon5Number', 'Wagon5Type',
               'ModuleRecieveDate' ]
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
-class SidingModuleListPageView(ListView):
+
+class SidingModuleListPageView(LoginRequiredMixin, ListView):
     model = models.ModuleRecieved
     template_name = 'sidings/ModulesList.html'
     ordering = ['-Date']
     paginate_by = 50
 
 
-class SidingModuleDetailPageView(DetailView):
+class SidingModuleDetailPageView(LoginRequiredMixin, DetailView):
     model = models.ModuleRecieved
     template_name = 'sidings/ModulesList_detail.html'
 
 
-class SidingModuleEditView(UpdateView):
+class SidingModuleEditView(LoginRequiredMixin, UpdateView):
     model = models.ModuleRecieved
     fields = ['RakeNumber', 'BPC_Number',
               'LineNumber', 'ModuleName', 
@@ -59,19 +67,20 @@ class SidingModuleEditView(UpdateView):
     template_name = 'sidings/ModulesList_edit.html'
 
 
-class SidingModuleEditROHDateView(UpdateView):
+class SidingModuleEditROHDateView(LoginRequiredMixin, UpdateView):
     model = models.ModuleRecieved
     fields = ['ModuleROHDate', 'ModulePOHDate']
     template_name = 'sidings/ModulesList_edit.html'
 
-class SidingModuleEditDefectView(UpdateView):
+
+class SidingModuleEditDefectView(LoginRequiredMixin, UpdateView):
     model = models.ModuleRecieved
     fields = ['Wagon1Defect', 'Wagon2Defect',
               'Wagon3Defect', 'Wagon4Defect', 'Wagon5Defect', ]
     template_name = 'sidings/ModulesList_edit.html'
 
 
-class SidingModuleEditDVSView(UpdateView):
+class SidingModuleEditDVSView(LoginRequiredMixin, UpdateView):
     model = models.ModuleRecieved
     fields = ['ModuleDVS', 'ModuleDVR',  'ModuleDVSDate',
               'ModulePresentPosition', 'ModuleMadeFit',
@@ -79,11 +88,13 @@ class SidingModuleEditDVSView(UpdateView):
     template_name = 'sidings/ModulesList_edit.html'
 
 
-class SidingModuleDeleteView(DeleteView):
+class SidingModuleDeleteView(LoginRequiredMixin, DeleteView):
     model = models.ModuleRecieved
     template_name = 'sidings/ModulesList_delete.html'
     success_url = reverse_lazy('siding_Modules_List')
 
+
+@login_required
 def moduleName(request):
     if request.is_ajax():
         if 'term' in request.GET:
@@ -109,6 +120,7 @@ def moduleName(request):
     return render(request, 'sidings/ModulesList.html')
 
 
+@login_required
 def RakeNumber(request):
     if request.is_ajax():
         if 'term' in request.GET:
@@ -137,6 +149,7 @@ def RakeNumber(request):
     return render(request, 'sidings/ModulesList.html')
 
 
+@login_required
 def ModuleDetailLink(request):
     if request.method=='POST':
         ModuleName = request.POST.get('moduleName')
@@ -157,6 +170,7 @@ def ModuleDetailLink(request):
     return render(request, 'sidings/ModulesList.html', context)
 
 
+@login_required
 def RakeDetailLink(request):
     if request.method == 'POST':
         RakeNumber = request.POST.get('RakeNumber')
@@ -178,6 +192,7 @@ def RakeDetailLink(request):
     return render(request, 'sidings/ModulesList.html', context)
         
 
+@login_required
 def DateDetailLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -202,6 +217,7 @@ def DateDetailLink(request):
     return render(request, 'sidings/ModulesList.html', context)
 
 
+@login_required
 def DateDetailGZBMUZLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -215,6 +231,7 @@ def DateDetailGZBMUZLink(request):
     return render(request, 'sidings/ModulesListGZBMUZ.html', context)
 
 
+@login_required
 def DateDetailGZBNOLILink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -228,6 +245,7 @@ def DateDetailGZBNOLILink(request):
     return render(request, 'sidings/ModulesListGZBNOLI.html', context)
 
 
+@login_required
 def DateDetailPNPBMDJLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -243,6 +261,7 @@ def DateDetailPNPBMDJLink(request):
     return render(request, 'sidings/ModulesListPNPBMDJ.html', context)
 
 
+@login_required
 def DateDetailPNPDWNALink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -258,6 +277,7 @@ def DateDetailPNPDWNALink(request):
     return render(request, 'sidings/ModulesListPNPDWNA.html', context)
 
 
+@login_required
 def DateDetailSSBGHHLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -273,6 +293,7 @@ def DateDetailSSBGHHLink(request):
     return render(request, 'sidings/ModulesListSSBGHH.html', context)
 
 
+@login_required
 def DateDetailSSBPTTLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -288,6 +309,7 @@ def DateDetailSSBPTTLink(request):
     return render(request, 'sidings/ModulesListSSBPTT.html', context)
 
 
+@login_required
 def DateDetailTKDACTLLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -303,6 +325,7 @@ def DateDetailTKDACTLLink(request):
     return render(request, 'sidings/ModulesListTKDACTL.html', context)
 
 
+@login_required
 def DateDetailTKDHTPPLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -318,6 +341,7 @@ def DateDetailTKDHTPPLink(request):
     return render(request, 'sidings/ModulesListTKDHTPP.html', context)
 
 
+@login_required
 def DateDetailTKDICDLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -334,6 +358,7 @@ def DateDetailTKDICDLink(request):
     return render(request, 'sidings/ModulesListTKDICD.html', context)
 
 
+@login_required
 def DateDetailYardLink(request):
     if request.method == 'POST':
         date1 = request.POST.get('date1')
@@ -348,6 +373,8 @@ def DateDetailYardLink(request):
         }
     return render(request, 'sidings/ModulesListYard.html', context)
 
+
+@login_required
 def TKDICDModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -365,6 +392,7 @@ def TKDICDModuleListPageView(request):
     return render(request, 'sidings/ModulesListTKDICD.html', context)
 
 
+@login_required
 def TKDICDModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -382,6 +410,7 @@ def TKDICDModuleListDVSPageView(request):
     return render(request, 'sidings/ModulesListTKDICD.html', context)
 
 
+@login_required
 def TKDHTPPModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -398,6 +427,7 @@ def TKDHTPPModuleListPageView(request):
     return render(request, 'sidings/ModulesListTKDHTPP.html', context)
 
 
+@login_required
 def TKDHTPPModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -415,7 +445,7 @@ def TKDHTPPModuleListDVSPageView(request):
     return render(request, 'sidings/ModulesListTKDHTPP.html', context)
 
 
-
+@login_required
 def TKDACTLModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -432,6 +462,7 @@ def TKDACTLModuleListPageView(request):
     return render(request, 'sidings/ModulesListTKDACTL.html', context)
 
 
+@login_required
 def TKDACTLModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -448,6 +479,8 @@ def TKDACTLModuleListDVSPageView(request):
     }
     return render(request, 'sidings/ModulesListTKDACTL.html', context)
 
+
+@login_required
 def SSBGHHModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -464,6 +497,7 @@ def SSBGHHModuleListPageView(request):
     return render(request, 'sidings/ModulesListSSBGHH.html', context)
 
 
+@login_required
 def SSBGHHModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -480,6 +514,8 @@ def SSBGHHModuleListDVSPageView(request):
     }
     return render(request, 'sidings/ModulesListSSBGHH.html', context)
 
+
+@login_required
 def SSBPTTModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -496,6 +532,7 @@ def SSBPTTModuleListPageView(request):
     return render(request, 'sidings/ModulesListSSBGHH.html', context)
 
 
+@login_required
 def SSBPTTModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -512,6 +549,8 @@ def SSBPTTModuleListDVSPageView(request):
     }
     return render(request, 'sidings/ModulesListSSBPTT.html', context)
 
+
+@login_required
 def PNPBMDJModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -528,6 +567,7 @@ def PNPBMDJModuleListPageView(request):
     return render(request, 'sidings/ModulesListPNPBMDJ.html', context)
 
 
+@login_required
 def PNPBMDJModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -544,6 +584,8 @@ def PNPBMDJModuleListDVSPageView(request):
     }
     return render(request, 'sidings/ModulesListPNPBMDJ.html', context)
 
+
+@login_required
 def PNPDWNAModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -560,6 +602,7 @@ def PNPDWNAModuleListPageView(request):
     return render(request, 'sidings/ModulesListPNPDWNA.html', context)
 
 
+@login_required
 def PNPDWNAModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -577,6 +620,7 @@ def PNPDWNAModuleListDVSPageView(request):
     return render(request, 'sidings/ModulesListPNPDWNA.html', context)
 
 
+@login_required
 def GZBNOLIModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -593,6 +637,7 @@ def GZBNOLIModuleListPageView(request):
     return render(request, 'sidings/ModulesListGZBNOLI.html', context)
 
 
+@login_required
 def GZBNOLIModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -609,6 +654,8 @@ def GZBNOLIModuleListDVSPageView(request):
     }
     return render(request, 'sidings/ModulesListGZBNOLI.html', context)
 
+
+@login_required
 def GZBMUZModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -625,6 +672,7 @@ def GZBMUZModuleListPageView(request):
     return render(request, 'sidings/ModulesListGZBMUZ.html', context)
 
 
+@login_required
 def GZBMUZModuleListDVSPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")
@@ -641,6 +689,8 @@ def GZBMUZModuleListDVSPageView(request):
     }
     return render(request, 'sidings/ModulesListGZBMUZ.html', context)
 
+
+@login_required
 def YardModuleListPageView(request):
     qs = models.ModuleRecieved.objects.all()
     print("qs")

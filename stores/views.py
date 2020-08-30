@@ -9,11 +9,16 @@ from django.utils import timezone
 from django.http import JsonResponse
 import json
 import math
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-class StoresHomePageView(TemplateView):
+
+
+class StoresHomePageView(LoginRequiredMixin, TemplateView):
     template_name = 'stores_home.html'
 
-class RegisterView(TemplateView):
+
+class RegisterView(LoginRequiredMixin, TemplateView):
      
     template_name = 'stores/Registers.html'
 
@@ -25,55 +30,85 @@ class RegisterView(TemplateView):
 #    ordering = ['-id']
 #    paginate_by = 10
 
-class registerCurrentStockCreateView(CreateView):
+class registerCurrentStockCreateView(LoginRequiredMixin, CreateView):
     model =  models.registerCurrentStock
     template_name = 'stores/registerCurrentStock/registerCurrentStock_new.html' 
     fields = '__all__'
 
-class registerCurrentStockDetailView(DetailView): 
+class registerCurrentStockDetailView(LoginRequiredMixin, DetailView): 
     model = models.registerCurrentStock 
     template_name = 'stores/registerCurrentStock/registerCurrentStock_detail.html'
 
-class registerCurrentStockEditView(UpdateView): 
+class registerCurrentStockEditView(LoginRequiredMixin, UpdateView): 
     model = models.registerCurrentStock
     fields = '__all__' 
     template_name = 'stores/registerCurrentStock/registerCurrentStock_edit.html'
 
-class registerCurrentStockDeleteView(DeleteView): 
+
+class registerCurrentStockDeleteView(LoginRequiredMixin, DeleteView):
     model = models.registerCurrentStock 
     template_name = 'stores/registerCurrentStock/registerCurrentStock_delete.html' 
     success_url = reverse_lazy('CSR')
 # Views for Wheel Recieved from Judw Register end
 
 # Views for Wheel Dispatched from Judw Register start
-class registerStockRecievedListView(ListView):
+class registerStockRecievedListView(LoginRequiredMixin, ListView):
     model = models.registerStockRecieved
     template_name = 'stores/registerStockRecieved/registerStockRecieved.html'
     ordering = ['-updateTime']
     paginate_by = 10
     
 
-class registerStockRecievedCreateView(CreateView):
+class registerStockRecievedCreateView(LoginRequiredMixin, CreateView):
     model =  models.registerStockRecieved
     template_name = 'stores/registerStockRecieved/registerStockRecieved_new.html' 
     fields = '__all__'
 
-class registerStockRecievedDetailView(DetailView): 
+class registerStockRecievedDetailView(LoginRequiredMixin, DetailView): 
     model = models.registerStockRecieved 
     template_name = 'stores/registerStockRecieved/registerStockRecieved_detail.html'
 
-class registerStockRecievedEditView(UpdateView): 
+class registerStockRecievedEditView(LoginRequiredMixin, UpdateView): 
     model = models.registerStockRecieved
     fields = [''] 
     template_name = 'stores/registerStockRecieved/registerStockRecieved_edit.html'
 
-class registerStockRecievedDeleteView(DeleteView): 
+class registerStockRecievedDeleteView(LoginRequiredMixin, DeleteView): 
     model = models.registerStockRecieved 
     template_name = 'stores/registerStockRecieved/registerStockRecieved_delete.html' 
     success_url = reverse_lazy('SRR')
 # Views for Wheel Dispatched from Judw Register end
 
 
+class registerStockDispatchedROH(LoginRequiredMixin, ListView):
+    model = models.registerStockDispatchedROH
+    template_name = 'stores/registerStockDispatchedROH.html'
+    ordering = ['-updateTime']
+    paginate_by = 10
+
+
+class registerStockDispatchSickline(LoginRequiredMixin, ListView):
+    model = models.registerStockDispatchedSickline
+    template_name = 'stores/registerStockDispatchedSickline.html'
+    ordering = ['-updateTime']
+    paginate_by = 10
+
+
+class registerStockDispatchedYard(LoginRequiredMixin, ListView):
+    model = models.registerStockDispatchedYard
+    template_name = 'stores/registerStockDispatchYard.html'
+    ordering = ['-updateTime']
+    paginate_by = 10
+
+
+class registerStockDispatchedTrainDuty(LoginRequiredMixin, ListView):
+    model = models.registerStockDispatchedTrainDuty
+    template_name = 'stores/registerStockDispatchTrainDuty.html'
+    ordering = ['-updateTime']
+    paginate_by = 10
+
+
+@login_required
 def currentStockListView(request):
     obj = models.registerCurrentStock.objects.all().order_by('Stock')
     print(obj)
@@ -105,6 +140,7 @@ def currentStockListView(request):
     return render(request, 'stores/registerCurrentStock/registerCurrentStock.html', context)
 
 
+@login_required
 def addNewStock(request):
     if request.method == 'POST':
         print(request.POST)
@@ -167,6 +203,7 @@ def addNewStock(request):
     return render(request, 'stores/registerCurrentStock/registerCurrentStock.html', context)
 
 
+@login_required
 def dispatchROH(request):
     if request.method=='POST':
         form = registerStockDispatchROHform(request.POST)
@@ -221,6 +258,7 @@ def dispatchROH(request):
     return render(request, 'stores/registerCurrentStock/registerCurrentStock.html', context)
 
 
+@login_required
 def dispatchSickline(request):
     if request.method=='POST':
         form = registerStockDispatchSicklineform(request.POST)
@@ -276,32 +314,8 @@ def dispatchSickline(request):
     return render(request, 'stores/registerCurrentStock/registerCurrentStock.html', context)
 
 
-class registerStockDispatchedROH(ListView):
-    model = models.registerStockDispatchedROH
-    template_name = 'stores/registerStockDispatchedROH.html'
-    ordering = ['-updateTime']
-    paginate_by = 10
 
-class registerStockDispatchSickline(ListView):
-    model = models.registerStockDispatchedSickline
-    template_name = 'stores/registerStockDispatchedSickline.html'
-    ordering = ['-updateTime']
-    paginate_by = 10
-
-class registerStockDispatchedYard(ListView):
-    model = models.registerStockDispatchedYard
-    template_name = 'stores/registerStockDispatchYard.html'
-    ordering = ['-updateTime']
-    paginate_by = 10
-
-class registerStockDispatchedTrainDuty(ListView):
-    model = models.registerStockDispatchedTrainDuty
-    template_name = 'stores/registerStockDispatchTrainDuty.html'
-    ordering = ['-updateTime']
-    paginate_by = 10
-
-
-
+@login_required
 def dispatchYard(request):
     if request.method=='POST':
         form = registerStockDispatchedYardform(request.POST)
@@ -360,7 +374,7 @@ def dispatchYard(request):
     return render(request, 'stores/registerCurrentStock/registerCurrentStock.html', context)
 
 
-
+@login_required
 def dispatchTrainDuty(request):
     if request.method=='POST':
         form = registerStockDispatchedTrainDutyform(request.POST)
@@ -417,6 +431,8 @@ def dispatchTrainDuty(request):
     }
     return render(request, 'stores/registerCurrentStock/registerCurrentStock.html', context)
 
+
+@login_required
 def autocomplete(request):
     if request.is_ajax():
         if 'term' in request.GET:
@@ -441,6 +457,8 @@ def autocomplete(request):
             
             return render(request, 'stores/registerCurrentStock/registerCurrentStock.html')
 
+
+@login_required
 def ItemQuickLink(request):
     if request.method == 'POST':
         ItemName = request.POST.get('ItemName')
@@ -474,6 +492,7 @@ def ItemQuickLink(request):
     return render(request, 'stores/registerCurrentStock/registerCurrentStock.html', context)
 
 
+@login_required
 def ItemNameAutocomplete(request):
     if request.is_ajax():
         if 'term' in request.GET:

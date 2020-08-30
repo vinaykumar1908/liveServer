@@ -4,11 +4,16 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from sidingz import models as sm
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-class SicklineHomePageView(TemplateView):
+
+
+class SicklineHomePageView(LoginRequiredMixin, TemplateView):
     template_name = 'sickline_home.html'
 
 
+@login_required
 def SicklineModules(request):
     qs = sm.ModuleRecieved.objects.all().filter(ModuleDVS=True)
     print(qs)

@@ -88,6 +88,21 @@ class SidingModuleEditDVSView(LoginRequiredMixin, UpdateView):
     template_name = 'sidings/ModulesList_edit.html'
 
 
+class SidingModuleEditROHFileView(LoginRequiredMixin, UpdateView):
+    model = models.ModuleRecieved
+    fields = ['ROHFile']
+    template_name = 'sidings/ModulesList_edit.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
 class SidingModuleDeleteView(LoginRequiredMixin, DeleteView):
     model = models.ModuleRecieved
     template_name = 'sidings/ModulesList_delete.html'

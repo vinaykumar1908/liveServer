@@ -15,7 +15,7 @@ class SicklineHomePageView(LoginRequiredMixin, TemplateView):
 
 @login_required
 def SicklineModules(request):
-    qs = sm.ModuleRecieved.objects.all().filter(ModuleDVS=True)
+    qs = sm.ModuleRecieved.objects.all().filter(ModuleDVS=True).filter(ModuleMadeFit=False)
     print(qs)
     qs = qs.order_by('-Date')
     context = {
@@ -23,3 +23,15 @@ def SicklineModules(request):
     }
 
     return render(request, 'sickline/sicklineModules.html', context)
+
+
+@login_required
+def SicklineModulesFIT(request):
+    qs = sm.ModuleRecieved.objects.all().filter(ModuleDVS=True).filter(ModuleMadeFit=True)
+    print(qs)
+    qs = qs.order_by('-Date')
+    context = {
+        'obj': qs
+    }
+
+    return render(request, 'sickline/sicklineModulesFIT.html', context)

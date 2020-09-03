@@ -13,6 +13,7 @@ urlpatterns = [
     path('sidingModuleList/<int:pk>/editROHDate/', views.SidingModuleEditROHDateView.as_view(), name='Modules_edit_ROHDate'),
     path('sidingModuleList/<int:pk>/editDefect/', views.SidingModuleEditDefectView.as_view(), name='Modules_edit_Defect'),
     path('sidingModuleList/<int:pk>/editDVS/', views.SidingModuleEditDVSView.as_view(), name='Modules_edit_DVS'),
+    path('sidingModuleList/<int:pk>/uploadROHFile/', views.SidingModuleEditROHFileView.as_view(), name='Modules_edit_ROHFile'),
     path('moduleName', views.moduleName, name='moduleName'),
     path('ModuleQuickLink', views.ModuleDetailLink, name='ModuleDetailLink'),
     path('RakeQuickLink', views.RakeDetailLink, name='RakeDetailLink'),

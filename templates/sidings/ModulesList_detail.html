@@ -12,6 +12,9 @@ Module Details-{{ object.RakeNumber }}
     <a class="btn btn-success" href="{%url 'Modules_edit_ROHDate' object.pk%}"><h5> Edit ROH/POH Date</h5></a>
     <a class="btn btn-success" href="{%url 'Modules_edit_Defect' object.pk%}"><h5> Edit Defects</h5></a>
     <a class="btn btn-success" href="{%url 'Modules_edit_DVS' object.pk%}"><h5> Edit DVS/Made Fit Position</h5></a>
+    <a class="btn btn-success" href="{%url 'Modules_edit_ROHFile' object.pk%}"><h5> Upload ROH FIle</h5></a>
+
+
 </div>
 <div class="book-detail">
 
@@ -152,8 +155,29 @@ Module Details-{{ object.RakeNumber }}
                 
             </tr>
         </tbody>
-    
+
 
 </div>
+{%if object.ROHFile and object.ModuleDVR %}
+<div class="book-detail">
 
+    <table class="table table-bordered">
+        <thead>
+            <tr>  
+            <th>ROH FILE </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class='danger'>
+                <td class='text-primary'><a class="btn btn-danger btn-lg " href="{{object.ROHFile.url}}"> View Uploaded File</a></td>
+                
+                
+            </tr>
+        </tbody>
+        
+
+</div>
+{%endif%}
+      
+      
 {% endblock content %}

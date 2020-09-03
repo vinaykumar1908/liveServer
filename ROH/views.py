@@ -149,7 +149,7 @@ class registerGaugeCalibrationDeleteView(LoginRequiredMixin, DeleteView):
 
 @login_required
 def ROHModules(request):
-    qs = sm.ModuleRecieved.objects.all().filter(ModuleDVR=True)
+    qs = sm.ModuleRecieved.objects.all().filter(ModuleDVR=True).filter(ModuleMadeFit=False)
     print(qs)
     qs = qs.order_by('-Date')
     context = {
@@ -157,3 +157,15 @@ def ROHModules(request):
     }
 
     return render(request, 'ROH/ROHModules.html', context)
+
+
+@login_required
+def ROHModulesFIT(request):
+    qs = sm.ModuleRecieved.objects.all().filter(ModuleDVR=True).filter(ModuleMadeFit=True)
+    print(qs)
+    qs = qs.order_by('-Date')
+    context = {
+        'obj': qs
+    }
+
+    return render(request, 'ROH/ROHModulesFIT.html', context)

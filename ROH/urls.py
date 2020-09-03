@@ -25,4 +25,8 @@ urlpatterns = [
     path('register/GC/<int:pk>/edit/', views.registerGaugeCalibrationEditView.as_view(), name='GC_edit'),
     path('register/GC/<int:pk>/delete/', views.registerGaugeCalibrationDeleteView.as_view(), name='GC_delete'),
     path('ROHModules', views.ROHModules, name='ROH_Modules'),
+    path('ROHModulesFIT', views.ROHModulesFIT, name='ROH_Modules_FIT'),
+
 ]
+
+

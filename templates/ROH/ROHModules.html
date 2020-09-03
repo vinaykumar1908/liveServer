@@ -35,6 +35,7 @@ ROH Modules
                 <th>Line No.</th>
                 <th>ModuleDVR</th>
                 <th>ModuleMadeFit</th>
+                <th>Checked By</th>
             </tr>
         </thead>
         {%for object in obj%}
@@ -48,8 +49,18 @@ ROH Modules
                 <td class='text-primary'>{{object.ModuleROHDate}}</td>
                 <td class='text-primary'>{{object.ModulePresentPosition}}</td> 
                 <td class='text-primary'>{{object.LineNumber}}</td>
-                <td class='text-primary'>{{object.ModuleDVR}}</td>
-                <td class='text-primary'>{{object.ModuleMadeFit}}</td>
+                {%if object.ModuleDVR == True%}
+                <td class='text-primary' style="background-color:#42eda0">{{object.ModuleDVR}}</td>                
+                {%else%}
+                <td class='text-primary' >{{object.ModuleDVR}}</td>
+                {%endif%}
+                {%if object.ModuleMadeFit == True%}
+                <td class='text-primary' style="background-color:#f7822f">{{object.ModuleMadeFit}}</td>
+                {%else%}
+                <td class='text-primary' >{{object.ModuleMadeFit}}</td>
+                {%endif%}
+                <td class='text-primary'>{{object.author}}</td>
+
             </tr>
         </tbody>
         {%endfor%}

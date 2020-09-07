@@ -11,9 +11,11 @@
             </div>
             <h2><a class="article-title" href="{% url 'cpost-detail' post.id %}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
+            <a href="{% url 'cpost-detail' post.id %}">Comments: {{ post.approved_comments.count }}</a>
           </div>
         </article>
     {% endfor %}
+    <div class="center">
     {% if is_paginated %}
 
       {% if page_obj.has_previous %}
@@ -35,4 +37,5 @@
       {% endif %}
 
     {% endif %}
+    </div>
 {% endblock content %}

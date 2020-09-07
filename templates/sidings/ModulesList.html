@@ -112,13 +112,13 @@ Sidings
                 {%else%}
                 <td class='text-primary' >{{object.ModuleMadeFit}}</td>
                 {%endif%}
-                <td class='text-primary'>{{object.author}}</td>
+                <td class='text-primary'><a href="{%url 'profilePage' object.author.pk %}">{{object.author}}</a></td>
 
             </tr>
         </tbody>
         {%endfor%}
 </table>
-<div class="pagination">
+<div class="pagination center">
     {% if is_paginated %}
 
   {% if page_obj.has_previous %}

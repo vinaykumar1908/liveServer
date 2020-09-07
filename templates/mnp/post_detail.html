@@ -45,7 +45,7 @@
         <a class="btn btn-danger " href="{{comment.upload.url}}" target="_blank" > View Comment File</a>
         {%endif%}
         {%if user == comment.author%}
-        <a class="btn btn-default" href="{% url 'bcomment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+        <a class="btn btn-default" href="{% url 'pcomment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
         {%endif%}
     </div>
     {% else %}

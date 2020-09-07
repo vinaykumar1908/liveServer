@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'sidingz.apps.SidingzConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
-    
+    'mnp.apps.MnpConfig',
+    'contracts.apps.ContractsConfig',
+
 ]
 
 MIDDLEWARE = [

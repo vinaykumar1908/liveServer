@@ -18,6 +18,7 @@ from itertools import filterfalse
 from django.utils import timezone
 # Create your views here.
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 @login_required
@@ -32,7 +33,7 @@ class SuccessPageView(TemplateView):
 @login_required
 def homeView(request):
     qs = SM.registerCurrentStock.objects.all()
-  
+    
     
     HM.p.objects.all().delete()
     qs1 = HM.p.objects.all()
@@ -48,10 +49,21 @@ def homeView(request):
     
     qs1 = HM.p.filterCriticalFun(request)
     qs1 = qs1.order_by('Stock')
-    
-    
+    rs = ZM.ModuleRecieved.objects.all()
+    rs = rs.filter(ModulePresentPosition="TKD_Sickline").exclude(ModuleMadeFit=True)
+    rs1 = ZM.ModuleRecieved.objects.all()
+    rs1 = rs1.filter(ModulePresentPosition="TKD_ROH1").exclude(ModuleMadeFit=True)
+    rs2 = ZM.ModuleRecieved.objects.all()
+    rs2 = rs2.filter(ModulePresentPosition="TKD_ROH2").exclude(ModuleMadeFit=True)
+    print('-------rs-------')
+    print(rs)
+    print('-------rs1-------')
+    print(rs1)
     context = {
         'obj': qs1,
+        'obj2': rs,
+        'obj3': rs1,
+        'obj4': rs2,
         #'obj2': qs2,
     }
     return render(request, 'home.html', context)

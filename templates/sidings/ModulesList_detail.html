@@ -5,15 +5,15 @@ Module Details-{{ object.RakeNumber }}
 {% endblock title %}
 
 {% block content %} 
+<h3 style="font-family: 'Courier New'; font-style: italic;"> Rake: {{object.RakeNumber}}, Module : {{object.ModuleName}} </h3>
 <div> 
     <a class="btn btn-success" href="{%url 'Modules_edit' object.pk%}"><h5> Edit Entry</h5></a>
-    <a class="btn btn-success" href="{%url 'Module_delete' object.pk%}"><h5>Delete Entry</h5> </a>
-    <a class="btn btn-success" href="{%url 'siding_Modules_List'%}"><h5> Back </h5></a> 
     <a class="btn btn-success" href="{%url 'Modules_edit_ROHDate' object.pk%}"><h5> Edit ROH/POH Date</h5></a>
     <a class="btn btn-success" href="{%url 'Modules_edit_Defect' object.pk%}"><h5> Edit Defects</h5></a>
     <a class="btn btn-success" href="{%url 'Modules_edit_DVS' object.pk%}"><h5> Edit DVS/Made Fit Position</h5></a>
+    {%if object.ModuleDVS == False %}
     <a class="btn btn-success" href="{%url 'Modules_edit_ROHFile' object.pk%}"><h5> Upload ROH FIle</h5></a>
-
+    {%endif%}
 
 </div>
 <div class="book-detail">

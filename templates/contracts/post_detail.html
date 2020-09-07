@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="center">Contracts Section</h2>
+
+  <article class="media content-section center">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ object.author }}</a>
+        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+        
+        {% if object.author == user %}
+          
+          <div class='row'>
+            <a class="btn btn-success btn-lg mt-1 mb-1 center col-sm" href="{% url 'cpost-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-lg mt-1 mb-1 center col-sm" href="{% url 'cpost-delete' object.id %}">Delete</a>
+          </div>
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ object.title }}</h2>
+      <p class="article-content">{{ object.content }}</p>
+        <a class="btn btn-light" style="" href="{% url 'cadd_comment_to_post' post.pk %}">Add comment</a>
+
+      {%if object.upload %}
+      <a class="btn btn-danger btn-lg " href="{{object.upload.url}}"> View Uploaded File</a>
+      {%endif%}
+    </div>
+  </article>
+  <hr>
+  {% for comment in post.ccomments.all %}
+    {% if user.is_authenticated or comment.approved_comment %}
+    <div class="comment center">
+        <div class="date">
+            {{ comment.created_date }}
+            {%if user == object.author%}
+            {% if not comment.approved_comment %}
+                <a class="btn btn-default" href="{% url 'ccomment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                <a class="btn btn-default" href="{% url 'ccomment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+            {% endif %}
+            {%endif%}
+        </div>
+        <strong>{{ comment.author }}</strong>
+        <p>{{ comment.text|linebreaks }}</p>
+        {%if comment.commentfile %}
+        <a class="btn btn-danger " href="{{comment.commentfile.url}}" target="_blank" > View Comment File</a>
+        {%endif%}
+        {%if user == comment.author%}
+        <a class="btn btn-default" href="{% url 'ccomment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-trash"></span></a>
+        {%endif%}
+    </div>
+    {% else %}
+    <p>No comments here yet :(</p>
+    {% endif %}
+{% endfor %}
+{% endblock content %}

@@ -25,6 +25,8 @@ class Profile(models.Model):
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    Mobile = models.BigIntegerField(null=True, blank=True)
+    LocalAddress = models.TextField(null=True, blank=True)
     IDNumber = models.CharField(max_length=30, default='ID Number', null=True)
     Designation = models.CharField(max_length=30, default='JE/C&W/TKD', null=True, blank=True)
     Posted = models.CharField(max_length=30, choices=PlaceOfPosting, default='TKD Administration', null=True, blank=True)

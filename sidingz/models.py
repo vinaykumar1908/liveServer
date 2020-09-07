@@ -140,7 +140,7 @@ class ModuleRecieved(models.Model):
     def __str__(self):
         return str(self.ModuleName)
     def get_absolute_url(self):
-        return reverse('siding_Modules_List')
+        return reverse('Modules_detail', kwargs={'pk': self.pk})
     
 
 

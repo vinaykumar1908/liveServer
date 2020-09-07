@@ -10,5 +10,9 @@ urlpatterns = [
     path('yard/', include('yard.urls')),
     path('sidings/', include('sidingz.urls')),
     path('MessageBoard/', include('blog.urls')),
+    path('MnP/', include('mnp.urls')),
+    path('Contracts/', include('contracts.urls')),
+    path('Employee/', include('employee.urls')),
+
     
 ]

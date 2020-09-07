@@ -34,7 +34,8 @@ class SidingModuleRecievedPageView(LoginRequiredMixin, CreateView):
               'Wagon3Number', 'Wagon3Type',
               'Wagon4Number', 'Wagon4Type',
               'Wagon5Number', 'Wagon5Type',
-              'ModuleRecieveDate' ]
+              'ModuleRecieveDate', 'ModuleDVS',
+              'ModuleDVR', 'ModuleMadeFit']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -195,7 +196,7 @@ def RakeDetailLink(request):
         print("qs")
         print(qs)
         res = qs.filter(RakeNumber=RakeNumber)
-        res = res.order_by("ModuleROHDate")
+        res = res.order_by("-ModuleROHDate")
         #print("qs")
         #print(qs)
         #res = qs.get(ModuleName=moduleName)
@@ -220,7 +221,7 @@ def DateDetailLink(request):
         print("qs")
         print(qs)
         res = qs.filter(ModuleRecieveDate__range=[date1, date2])
-        res = res.order_by("ModuleROHDate")
+        res = res.order_by("-ModuleROHDate")
         #print("qs")
         #print(qs)
         #res = qs.get(ModuleName=moduleName)

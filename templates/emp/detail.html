@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Gauge Calibration Register-{{ object.Date }}
+{% endblock title %}
+
+{% block content %} 
+<div> 
+    <a class="btn btn-success" href="{% url 'CSR_edit' object.pk %}"><h5> Edit Entry</h5></a>
+    <a class="btn btn-success" href="{% url 'CSR_delete' object.pk %}"><h5>Delete Entry</h5> </a>
+    <a class="btn btn-success" href="{% url 'CSR' %}"><h5> Back </h5></a> 
+</div>
+<div style="flex-grow: 8; background-color:DodgerBlue;" >
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+          
+            <th>Email</th>
+            <th>Date Joined</th>
+            <th>Date Joined</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        
+            <tr class='danger'>
+                
+                
+                <td class='text-primary'>{{object.email}}</td>
+                <td class='text-primary'>{{object.date_joined}}</td>
+                <td class='text-primary'>{{object.password}}</td>
+
+                
+            </tr>
+       
+        </tbody>
+        
+        </table>
+    </div >
+{% endblock content %}
+
+
+    

@@ -8,13 +8,168 @@ Home
 
 {%block content%}
 
+<div class="container-fluid">
+<div class="row" style="background-color: teal;">
+    <div class="">
+    <h3  class="text-dark">Modules In Sickline</h3>
+    </div>
+    <div class="overflow-auto w-80 h-10" style="background-color:DodgerBlue;" >
+        <table class="table table-bordered ">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Rake Name</th>
+                <th>Module Name</th>
+                <th>Module Recieve Date</th>
+                <th>Module ROH Date</th>
+                <th>Module Present Position</th>
+                <th>Line No.</th>
+                <th>ModuleDVS</th>
+                <th>ModuleMadeFit</th>
+                <th>Checked By</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {%for object in obj2  %}
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'>{{object.RakeNumber}}</a></td> 
+                <td class='text-primary'>{{object.ModuleName}}</td>
+                <td class='text-primary'>{{object.ModuleRecieveDate}}</td>
+                <td class='text-primary'>{{object.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object.ModulePresentPosition}}</td> 
+                <td class='text-primary'>{{object.LineNumber}}</td>
+                {%if object.ModuleDVS == True%}
+                <td class='text-primary' style="background-color:#42eda0">{{object.ModuleDVS}}</td>
+                {%else%}
+                <td class='text-primary' >{{object.ModuleDVS}}</td>
+                {%endif%}
+                {%if object.ModuleMadeFit == True%}
+                <td class='text-primary' style="background-color:#f7822f">{{object.ModuleMadeFit}}</td>
+                {%else%}
+                <td class='text-primary' >{{object.ModuleMadeFit}}</td>
+                {%endif%}
+                <td class='text-primary'>{{object.author}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+        
+        </table>
+    </div >
 
+</div>
+<div class="row" style="background-color: teal;">
+    <div class="">
+    <h3  class="text-dark">Modules In ROH 1</h3>
+    </div>
+    <div class="overflow-auto w-80 h-10" style="background-color:DodgerBlue;" >
+        <table class="table table-bordered ">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Rake Name</th>
+                <th>Module Name</th>
+                <th>Module Recieve Date</th>
+                <th>Module ROH Date</th>
+                <th>Module Present Position</th>
+                <th>Line No.</th>
+                <th>ModuleDVR</th>
+                <th>ModuleMadeFit</th>
+                <th>Checked By</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {%for object in obj3  %}
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'>{{object.RakeNumber}}</a></td> 
+                <td class='text-primary'>{{object.ModuleName}}</td>
+                <td class='text-primary'>{{object.ModuleRecieveDate}}</td>
+                <td class='text-primary'>{{object.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object.ModulePresentPosition}}</td> 
+                <td class='text-primary'>{{object.LineNumber}}</td>
+                {%if object.ModuleDVR == True%}
+                <td class='text-primary' style="background-color:#42eda0">{{object.ModuleDVR}}</td>
+                {%else%}
+                <td class='text-primary' >{{object.ModuleDVR}}</td>
+                {%endif%}
+                {%if object.ModuleMadeFit == True%}
+                <td class='text-primary' style="background-color:#f7822f">{{object.ModuleMadeFit}}</td>
+                {%else%}
+                <td class='text-primary' >{{object.ModuleMadeFit}}</td>
+                {%endif%}
+                <td class='text-primary'>{{object.author}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+        
+        </table>
+    </div >
 
-<div class="" style="background-color: teal;">
+</div>
+<div class="row" style="background-color: teal;">
+    <div class="">
+    <h3  class="text-dark">Modules In ROH 2</h3>
+    </div>
+    <div class="overflow-auto w-80 h-10" style="background-color:DodgerBlue;" >
+        <table class="table table-bordered ">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Date</th>
+                <th>Rake Name</th>
+                <th>Module Name</th>
+                <th>Module Recieve Date</th>
+                <th>Module ROH Date</th>
+                <th>Module Present Position</th>
+                <th>Line No.</th>
+                <th>ModuleDVR</th>
+                <th>ModuleMadeFit</th>
+                <th>Checked By</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {%for object in obj4  %}
+            <tr class='danger'>
+                <td class='text-primary'>{{forloop.counter}}</td>
+                <td class='text-primary'>{{object.Date}}</td>
+                <td class='text-primary'>{{object.RakeNumber}}</a></td> 
+                <td class='text-primary'>{{object.ModuleName}}</td>
+                <td class='text-primary'>{{object.ModuleRecieveDate}}</td>
+                <td class='text-primary'>{{object.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object.ModulePresentPosition}}</td> 
+                <td class='text-primary'>{{object.LineNumber}}</td>
+                {%if object.ModuleDVR == True%}
+                <td class='text-primary' style="background-color:#42eda0">{{object.ModuleDVR}}</td>
+                {%else%}
+                <td class='text-primary' >{{object.ModuleDVR}}</td>
+                {%endif%}
+                {%if object.ModuleMadeFit == True%}
+                <td class='text-primary' style="background-color:#f7822f">{{object.ModuleMadeFit}}</td>
+                {%else%}
+                <td class='text-primary' >{{object.ModuleMadeFit}}</td>
+                {%endif%}
+                <td class='text-primary'>{{object.author}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+        
+        </table>
+    </div >
+
+</div>
+<div class="row" style="background-color: teal;">
     <div class="">
     <h3  class="text-dark">Critical Items</h3>
     </div>
-    <div class="overflow-auto w-80 h-10" style="background-color:DodgerBlue;" >
+    <div class="overflow-auto w-80 h-10" style="background-color:DodgerBlue; " >
         <table class="table table-bordered ">
         <thead>
             <tr>
@@ -47,6 +202,7 @@ Home
         </table>
     </div >
 
+</div>
 </div>
 
 

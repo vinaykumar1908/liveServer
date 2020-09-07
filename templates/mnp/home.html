@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block head %}
+
+{% endblock head %}
+{% block content %}
+<h2 class="center">MnP Section</h2>
+
+<div class='center'>
+    <a class="btn-lg" style="background-color:Grey; color:White; font-weight: 400; font-size: 15px; margin-right:0px;" href="{%url 'mnppost-create'%}">New Post</a>
+</div>
+    {% for post in posts %}
+    <div class="center bg-warning" style="border-style: inset; border-width: 5px; border-radius: 10px;" >
+        <article class="media content-section">
+        <img class="rounded-circle article-img" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px; float: left; margin-left: 100px " src="{{ post.author.profile.image.url }}">
+
+          <div class="media-body" >
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url 'mnpuser-posts' post.author.username %}">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title text-white " href="{%url 'mnppost-detail' post.id%}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+<a href="{% url 'mnppost-detail' post.id %}">Comments: {{ post.approved_comments.count }}</a>
+          </div>
+        </article>
+    </div>
+    {% endfor %}
+{% endblock content %}

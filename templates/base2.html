@@ -1,0 +1,103 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{%static 'home/main.css'%}">
+        
+        <title>{%block title%}{%endblock title%}</title>
+        <style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid blue;
+  padding: 10px;
+  text-align: center;
+  border-style: inset; 
+  border-width: 5px; 
+  border-radius: 10px;
+  border-style: inset; 
+  border-width: 5px; 
+  border-radius: 10px;
+}
+</style>
+        {%block head%}{%endblock head%}
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    </head>
+    <body class='bg-info'>
+        <!-- #region Navbar-->
+        
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+            
+              <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'home'%}">WCC TKD</a>
+              </div>
+              {% if user.is_authenticated %}
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'home'%}">Home</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Departments <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{%url 'stores_home'%}">Stores</a></li>
+                    <li><a href="{%url 'ROH_home'%}">ROH</a></li>
+                    <li><a href="{%url 'sickline_home'%}">Sickline</a></li>
+                    <li><a href="{%url 'yard_home'%}">TKD Yard</a></li>
+                    <li><a href="{%url 'sidings_home'%}">Sidings</a></li>
+                    <li><a href="{%url 'mnpHome'%}">MnP Dept</a></li>
+                    <li><a href="{%url 'cblogHome'%}">Contracts Dept</a></li>
+
+                  </ul>
+                </li>
+                
+                <li><a href="{%url 'blogHome'%}">Message Board</a></li>
+                <li><a href="{%url 'empHome'%}">Employee Detail</a></li>
+                <li ><a href="{%url 'siding_Modules_Recieved'%}">Module Entry</a></li>
+                <li ><a href="{%url 'siding_Modules_List'%}">Modules List</a></li>
+              </ul>
+              <form class="navbar-form navbar-left" action="#">
+                <div class="form-group">
+                    <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+              
+              <a class="nav-item nav-link navbar-right btn-lg" style="background-color:Grey; color:White; font-weight: 500; font-size: 15px;  margin-right:5px; margin-top:5px;" href="{%url 'logout'%}">Logout</a>
+              {% else %}
+              <a class="nav-item nav-link navbar-right btn-lg" style="background-color:Grey; color:White; font-weight: 700; font-size: 15px; margin-right:0px; margin-top:5px;" href="{%url 'login'%}">Login</a>
+              {% endif %}
+            </div>
+          </nav>
+          
+          </div>
+            <!-- Navbar Right Side -->
+            
+        <!-- #endregion Navbar -->
+       <div class='bg-transparent'>
+       {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+            {% block content %}{% endblock %}
+       </div>
+        
+      
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+    </body>
+    {% block afterbody %}{% endblock %}
+</html>

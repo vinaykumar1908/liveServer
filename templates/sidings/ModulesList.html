@@ -112,7 +112,11 @@ Sidings
                 {%else%}
                 <td class='text-primary' >{{object.ModuleMadeFit}}</td>
                 {%endif%}
+                {%if object.author %}
                 <td class='text-primary'><a href="{%url 'profilePage' object.author.pk %}">{{object.author}}</a></td>
+                {% else %}
+                <td class='text-primary'>{{object.author}}</a></td>
+                {%endif%}
 
             </tr>
         </tbody>

@@ -7,7 +7,7 @@ Home
 
 
 {%block content%}
-
+<h4 style="font-family: 'Times New Roman'; font-style: italic;">Time: {{time}}</h4>
 <div class="container-fluid">
 <div class="row" style="background-color: teal;">
     <div class="">
@@ -33,11 +33,12 @@ Home
         
         <tbody>
         {%for object in obj2  %}
+        
             <tr class='danger'>
                 <td class='text-primary'>{{forloop.counter}}</td>
                 <td class='text-primary'>{{object.Date}}</td>
                 <td class='text-primary'>{{object.RakeNumber}}</a></td> 
-                <td class='text-primary'>{{object.ModuleName}}</td>
+                <td class='text-primary'><a href="{%url 'Modules_detail' object.pk %}" target="_blank">{{object.ModuleName}}</td>
                 <td class='text-primary'>{{object.ModuleRecieveDate}}</td>
                 <td class='text-primary'>{{object.ModuleROHDate}}</td>
                 <td class='text-primary'>{{object.ModulePresentPosition}}</td> 
@@ -54,6 +55,7 @@ Home
                 {%endif%}
                 <td class='text-primary'>{{object.author}}</td>
             </tr>
+            
         {%endfor%}
         </tbody>
         
@@ -84,28 +86,30 @@ Home
         </thead>
         
         <tbody>
-        {%for object in obj3  %}
+        {%for object3 in obj3  %}
+       
             <tr class='danger'>
                 <td class='text-primary'>{{forloop.counter}}</td>
-                <td class='text-primary'>{{object.Date}}</td>
-                <td class='text-primary'>{{object.RakeNumber}}</a></td> 
-                <td class='text-primary'>{{object.ModuleName}}</td>
-                <td class='text-primary'>{{object.ModuleRecieveDate}}</td>
-                <td class='text-primary'>{{object.ModuleROHDate}}</td>
-                <td class='text-primary'>{{object.ModulePresentPosition}}</td> 
-                <td class='text-primary'>{{object.LineNumber}}</td>
-                {%if object.ModuleDVR == True%}
-                <td class='text-primary' style="background-color:#42eda0">{{object.ModuleDVR}}</td>
+                <td class='text-primary'>{{object3.Date}}</td>
+                <td class='text-primary'>{{object3.RakeNumber}}</a></td> 
+                <td class='text-primary'><a href="{%url 'Modules_detail' object3.pk %}" target="_blank">{{object3.ModuleName}}</td>
+                <td class='text-primary'>{{object3.ModuleRecieveDate}}</td>
+                <td class='text-primary'>{{object3.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object3.ModulePresentPosition}}</td> 
+                <td class='text-primary'>{{object3.LineNumber}}</td>
+                {%if object3.ModuleDVR == True%}
+                <td class='text-primary' style="background-color:#42eda0">{{object3.ModuleDVR}}</td>
                 {%else%}
-                <td class='text-primary' >{{object.ModuleDVR}}</td>
+                <td class='text-primary' >{{object3.ModuleDVR}}</td>
                 {%endif%}
-                {%if object.ModuleMadeFit == True%}
-                <td class='text-primary' style="background-color:#f7822f">{{object.ModuleMadeFit}}</td>
+                {%if object3.ModuleMadeFit == True%}
+                <td class='text-primary' style="background-color:#f7822f">{{object3.ModuleMadeFit}}</td>
                 {%else%}
-                <td class='text-primary' >{{object.ModuleMadeFit}}</td>
+                <td class='text-primary' >{{object3.ModuleMadeFit}}</td>
                 {%endif%}
-                <td class='text-primary'>{{object.author}}</td>
+                <td class='text-primary'>{{object3.author}}</td>
             </tr>
+        
         {%endfor%}
         </tbody>
         
@@ -136,29 +140,71 @@ Home
         </thead>
         
         <tbody>
-        {%for object in obj4  %}
+        {%for object1 in ROH2  %}
+        
             <tr class='danger'>
                 <td class='text-primary'>{{forloop.counter}}</td>
-                <td class='text-primary'>{{object.Date}}</td>
-                <td class='text-primary'>{{object.RakeNumber}}</a></td> 
-                <td class='text-primary'>{{object.ModuleName}}</td>
-                <td class='text-primary'>{{object.ModuleRecieveDate}}</td>
-                <td class='text-primary'>{{object.ModuleROHDate}}</td>
-                <td class='text-primary'>{{object.ModulePresentPosition}}</td> 
-                <td class='text-primary'>{{object.LineNumber}}</td>
-                {%if object.ModuleDVR == True%}
-                <td class='text-primary' style="background-color:#42eda0">{{object.ModuleDVR}}</td>
+                <td class='text-primary'>{{object1.Date}}</td>
+                <td class='text-primary'>{{object1.RakeNumber}}</a></td> 
+                <td class='text-primary'><a href="{%url 'Modules_detail' object1.pk %}" target="_blank">{{object1.ModuleName}}</td>
+                <td class='text-primary'>{{object1.ModuleRecieveDate}}</td>
+                <td class='text-primary'>{{object1.ModuleROHDate}}</td>
+                <td class='text-primary'>{{object1.ModulePresentPosition}}</td> 
+                <td class='text-primary'>{{object1.LineNumber}}</td>
+                {%if object1.ModuleDVR == True%}
+                <td class='text-primary' style="background-color:#42eda0">{{object1.ModuleDVR}}</td>
                 {%else%}
-                <td class='text-primary' >{{object.ModuleDVR}}</td>
+                <td class='text-primary' >{{object1.ModuleDVR}}</td>
                 {%endif%}
-                {%if object.ModuleMadeFit == True%}
-                <td class='text-primary' style="background-color:#f7822f">{{object.ModuleMadeFit}}</td>
+                {%if object1.ModuleMadeFit == True%}
+                <td class='text-primary' style="background-color:#f7822f">{{object1.ModuleMadeFit}}</td>
                 {%else%}
-                <td class='text-primary' >{{object.ModuleMadeFit}}</td>
+                <td class='text-primary' >{{object1.ModuleMadeFit}}</td>
                 {%endif%}
-                <td class='text-primary'>{{object.author}}</td>
+                <td class='text-primary'>{{object1.author}}</td>
             </tr>
+        
         {%endfor%}
+        </tbody>
+        
+        </table>
+    </div >
+
+</div>
+<div class="row" style="background-color: teal;">
+    <div class="">
+    <h3  class="text-dark">Stats</h3>
+    </div>
+    <div class="overflow-auto w-80 h-10" style="background-color:DodgerBlue;" >
+        <table class="table table-bordered ">
+        <thead>
+            <tr>
+                <th>No. of examinations this month</th>
+                <th>No of Item Critical </th>
+                <th>ROH fitment modules this month</th>
+                 <th>Sickline fitment this month</th>               
+                <th>Cases related to EM Pad this month</th>
+                <th>Cases related to Adopter this month</th>
+
+
+            </tr>
+        </thead>
+        
+        <tbody>
+        
+            <tr class='danger'>
+                <td class='text-primary'>{{obj4.count}}</td>
+                <td class='text-primary'>{{obj.count}}</td>
+                <td class='text-primary'><a href="{%url 'ROH_Modules_FIT' %}">{{obj7.count}}</td>
+                <td class='text-primary'><a href="{%url 'Sickline_Modules_FIT' %}">{{obj8.count}}</td>
+
+                <td class='text-primary'><a href="{%url 'EMPAD' %}">{{obj5.count}} Wagon/s</td>
+                <td class='text-primary'><a href="{%url 'Adopter' %}">{{obj6.count}} Wagon/s</td>
+
+                
+            </tr>
+        
+       
         </tbody>
         
         </table>

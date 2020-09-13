@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render
-
+from django.db.models import Q
 # Create your views here.
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
@@ -12,6 +12,7 @@ from sidingz import models as ZM
 from django.urls import reverse_lazy
 from django.db import models
 import math
+from datetime import date, datetime
 from home import models as HM
 from itertools import filterfalse
 #from .forms import registerStockRecievedForm, registerStockDispatchROHform, registerStockDispatchSicklineform, registerStockDispatchedYardform, registerStockDispatchedTrainDutyform
@@ -33,8 +34,8 @@ class SuccessPageView(TemplateView):
 @login_required
 def homeView(request):
     qs = SM.registerCurrentStock.objects.all()
-    
-    
+
+
     HM.p.objects.all().delete()
     qs1 = HM.p.objects.all()
     for l in qs:
@@ -46,28 +47,40 @@ def homeView(request):
         y.criticalFun()
         y.save()
         
-    
+
     qs1 = HM.p.filterCriticalFun(request)
     qs1 = qs1.order_by('Stock')
-    rs = ZM.ModuleRecieved.objects.all()
-    rs = rs.filter(ModulePresentPosition="TKD_Sickline").exclude(ModuleMadeFit=True)
-    rs1 = ZM.ModuleRecieved.objects.all()
-    rs1 = rs1.filter(ModulePresentPosition="TKD_ROH1").exclude(ModuleMadeFit=True)
-    rs2 = ZM.ModuleRecieved.objects.all()
-    rs2 = rs2.filter(ModulePresentPosition="TKD_ROH2").exclude(ModuleMadeFit=True)
-    print('-------rs-------')
+    rs = ZM.ModuleRecieved.objects.filter(Q(ModulePresentPosition__iendswith="TKD_Sickline") & Q(ModuleDVS=True) & Q(ModuleMadeFit=False))
+    rs1 = ZM.ModuleRecieved.objects.filter(Q(ModulePresentPosition__iendswith="TKD_ROH1") & Q(ModuleDVR=True) & Q(ModuleMadeFit=False))
+    ROH2 = ZM.ModuleRecieved.objects.filter(Q(ModulePresentPosition__iendswith="TKD_ROH2") & Q(ModuleDVR=True) & Q(ModuleMadeFit=False))
+    print('rs')
     print(rs)
-    print('-------rs1-------')
+    print('rs1')
     print(rs1)
+    print('rs2')
+    print(ROH2)
+    qs2 = timezone.now()
+    a = ZM.ModuleRecieved.objects.filter(ModuleRecieveDate__month=(qs2.month))
+    k = a.filter(Q(Wagon1Defect__icontains="em pad") | (Q(Wagon2Defect__icontains="em pad")) | (Q(Wagon3Defect__icontains="em pad")) | (Q(Wagon4Defect__icontains="em pad")) | (Q(Wagon5Defect__icontains="em pad"))).filter(ModuleRecieveDate__month=(qs2.month))
+    l = a.filter(Q(Wagon1Defect__icontains="adopter") | (Q(Wagon2Defect__icontains="adopter")) | (Q(Wagon3Defect__icontains="adopter")) | (Q(Wagon4Defect__icontains="adopter")) | (Q(Wagon5Defect__icontains="adopter"))).filter(ModuleRecieveDate__month=(qs2.month))
+    m = a.filter(Q(ModuleMadeFit=True) & Q(ModuleDVR=True))
+    n = a.filter(Q(ModuleMadeFit=True) & Q(ModuleDVS=True))
+    o = a.filter(Q(ModuleDVR=True) & Q(ModuleRecieveDate__month=(qs2.month)))
+    print(k)
+    print(l)
+
     context = {
         'obj': qs1,
         'obj2': rs,
         'obj3': rs1,
-        'obj4': rs2,
-        #'obj2': qs2,
+        'ROH2': ROH2,
+        'obj4': a,
+        'obj5': k,
+        'obj6': l,
+        'obj7': m,
+        'obj8': n,
+        'time': qs2,
+
+
     }
     return render(request, 'home.html', context)
-
-
-
-
